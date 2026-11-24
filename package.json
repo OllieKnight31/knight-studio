@@ -1,0 +1,123 @@
+{
+  "name": "knight-studio",
+  "productName": "Knight Studio",
+  "version": "0.12.0",
+  "description": "Screen + camera recorder and editor. Local-first, macOS native capture.",
+  "main": "app/main/index.js",
+  "private": true,
+  "scripts": {
+    "native": "bash native/build.sh",
+    "dev:renderer": "vite",
+    "dev": "concurrently -k -n vite,electron -c cyan,magenta \"vite\" \"wait-on tcp:5173 && electron .\"",
+    "build:renderer": "node build/check-ipc.js && vite build",
+    "start": "electron .",
+    "setup": "npm install && bash scripts/fetch-ffmpeg.sh && npm run native",
+    "dist": "npm run native && bash scripts/fetch-ffmpeg.sh && npm run build:renderer && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --universal",
+    "app": "open -a 'Knight Studio'",
+    "pack": "npm run native && bash scripts/fetch-ffmpeg.sh && npm run build:renderer && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --universal --dir",
+    "check:ipc": "node build/check-ipc.js",
+    "install:app": "bash scripts/install.sh",
+    "release": "npm run dist && npm run install:app",
+    "package": "bash scripts/package-public.sh"
+  },
+  "author": "Knight Studio",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.15.3",
+    "ffmpeg-static": "^5.3.0",
+    "vite": "^7.1.7",
+    "wait-on": "^9.0.1"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1",
+    "mp4-muxer": "^5.2.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "build": {
+    "appId": "com.knightstudio.app",
+    "productName": "Knight Studio",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "app/**/*",
+      "dist/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "extraResources": [
+      {
+        "from": "native/bin/knightcap",
+        "to": "knightcap"
+      },
+      {
+        "from": "scripts",
+        "to": "scripts",
+        "filter": [
+          "*.py"
+        ]
+      },
+      {
+        "from": "vendor/bin/ffmpeg",
+        "to": "bin/ffmpeg"
+      },
+      {
+        "from": "vendor/bin/whisper-cli",
+        "to": "bin/whisper-cli"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.LICENSE",
+        "to": "licenses/ffmpeg.LICENSE"
+      },
+      {
+        "from": "node_modules/ffmpeg-static/ffmpeg.README",
+        "to": "licenses/ffmpeg.README"
+      },
+      {
+        "from": "vendor/whisper.cpp-LICENSE",
+        "to": "licenses/whisper.cpp.LICENSE"
+      },
+      {
+        "from": "build",
+        "to": ".",
+        "filter": [
+          "drive-client.json"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.video",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "extendInfo": {
+        "NSCameraUsageDescription": "Knight Studio records your camera so you can appear alongside your screen.",
+        "NSMicrophoneUsageDescription": "Knight Studio records your microphone for voiceover.",
+        "NSAppleEventsUsageDescription": "Knight Studio uses system events to control recording.",
+        "LSMinimumSystemVersion": "15.0",
+        "LSUIElement": false
+      },
+      "x64ArchFiles": "Contents/Resources/{knightcap,bin/*}"
+    }
+  },
+  "knight": {
+    "updateFeed": "",
+    "cloud": {
+      "url": "",
+      "key": ""
+    }
+  }
+}

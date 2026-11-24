@@ -1,0 +1,29 @@
+{
+  "voice": "kokoro",
+  "videos": {
+    "drive": {
+      "title": "Connect Google Drive",
+      "seconds": 66
+    },
+    "notion": {
+      "title": "Connect Notion",
+      "seconds": 90
+    },
+    "airtable": {
+      "title": "Connect Airtable",
+      "seconds": 75
+    },
+    "supabase": {
+      "title": "Connect Supabase",
+      "seconds": 94
+    },
+    "share": {
+      "title": "Set up share pages",
+      "seconds": 113
+    },
+    "webhook": {
+      "title": "Connect a webhook",
+      "seconds": 77
+    }
+  }
+}

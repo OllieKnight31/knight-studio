@@ -1,0 +1,22 @@
+Knight Studio: how to install
+==============================
+
+Needs: any Mac running macOS 15 (Sequoia) or later, Apple silicon or Intel.
+To check: Apple menu → About This Mac.
+
+1. Drag "Knight Studio" into your Applications folder and open it.
+
+2. Knight Studio opens on a system check. Allow the permissions it lists:
+
+     - Screen & System Audio Recording: required to record.
+     - Accessibility: required for automatic zoom (it tracks your clicks).
+     - Camera and Microphone: only if you want to appear on camera / be heard.
+
+   macOS asks you to quit and reopen the app after some of these. Do that, then
+   press "Check again".
+
+3. Record. Everything stays on your Mac unless you connect Google Drive in
+   Settings.
+
+Captions download a speech model (about 150 MB) the first time you use them.
+After that they work offline. Your audio is never uploaded.

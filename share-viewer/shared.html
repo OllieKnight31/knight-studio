@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Shared with me</title>
+<link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap" id="app"><div class="state"><div class="spinner"></div></div></div>
+<script src="config.js"></script>
+<script src="player.js"></script>
+<script src="cloud.js"></script>
+<script>
+// "Shared with me": every video this person has been given, and how far they have got.
+(() => {
+  const app = document.getElementById('app')
+  const { fail, esc, clock } = window.KSPlayer
+  const cloud = window.KSCloud
+  if (!cloud.ready) return fail(app, 'Sharing is not available yet', 'This page has not been connected to the sharing service.')
+  cloud.adoptLink()
+
+  const tile = v => `<a class="tile" href="watch?v=${encodeURIComponent(v.id)}" data-id="${esc(v.id)}">
+      <div class="thumb" ${v.poster ? `style="background-image:url('${esc(cloud.fileUrl(v.poster))}')"` : ''}>
+        <span class="len">${clock(v.duration)}</span>
+        ${v.percent ? `<div class="prog"><i style="width:${v.completed ? 100 : v.percent}%"></i></div>` : ''}
+      </div>
+      <b>${esc(v.title)}</b>
+      <div class="sub"><span>${esc(v.from || '')}</span>${v.completed ? '<span class="pill done">✓ Completed</span>' : v.required ? '<span class="pill">Required</span>' : ''}${!v.completed && v.percent ? `<span>${v.percent}% watched</span>` : ''}</div>
+    </a>`
+
+  async function open () {
+    if (!cloud.signedIn()) {
+      return cloud.gate(app, { title: 'Shared with me', text: 'Sign in with your email address to see the videos that have been shared with you.', onDone: open })
+    }
+    app.innerHTML = '<div class="state"><div class="spinner"></div></div>'
+    let list
+    try { list = await cloud.rpc('ks_shared_with_me', {}) } catch (e) {
+      if (/sign in/i.test(e.message)) { cloud.signOut(); return open() }
+      return fail(app, 'Your videos could not be loaded', 'Check your internet connection and try again.')
+    }
+    const todo = list.filter(v => v.required && !v.completed)
+    const rest = list.filter(v => !(v.required && !v.completed))
+    app.innerHTML = `
+      <div class="bar"><div class="grow"><span>Shared with me</span></div><span class="who">${esc(cloud.email())}</span><button id="out">Sign out</button></div>
+      ${!list.length ? `<div class="state"><b>Nothing has been shared with you yet</b><span>Videos shared with ${esc(cloud.email())} will appear here.</span></div>` : ''}
+      ${todo.length ? `<h2 class="big" id="todo">To watch <span style="color:var(--soft);font-weight:400">· ${todo.length} required</span></h2><div class="grid">${todo.map(tile).join('')}</div>` : ''}
+      ${rest.length ? `<h2 class="big">${todo.length ? 'Everything else' : 'Your videos'}</h2><div class="grid">${rest.map(tile).join('')}</div>` : ''}`
+    app.querySelector('#out').onclick = () => { cloud.signOut(); open() }
+  }
+  open()
+})()
+</script>
+</body>
+</html>

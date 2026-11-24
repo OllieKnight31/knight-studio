@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!--
+    Embedded into the knightcap binary at link time.
+
+    Without this, knightcap is a bare Mach-O with no bundle identity, and macOS has
+    nowhere to persist a privacy grant for it — so it re-asks for camera, microphone
+    and screen recording on every single launch, which means every single recording.
+
+    The identifier must stay "knightcap" and match the code signature. Claiming the
+    app's own bundle identifier looks like a conflicting second copy of the app to
+    macOS, which refuses screen capture outright ("the user declined TCCs for
+    application, window, display capture") even while CGPreflightScreenCaptureAccess
+    still reports true. CFBundleName is what the user sees in Privacy settings, so it
+    still reads as Knight Studio there.
+  -->
+  <key>CFBundleIdentifier</key>
+  <string>knightcap</string>
+  <key>CFBundleName</key>
+  <string>Knight Studio</string>
+  <key>CFBundleDisplayName</key>
+  <string>Knight Studio</string>
+  <key>CFBundleExecutable</key>
+  <string>knightcap</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>0.1.0</string>
+  <key>CFBundleVersion</key>
+  <string>1</string>
+  <key>LSUIElement</key>
+  <true/>
+  <key>NSCameraUsageDescription</key>
+  <string>Knight Studio records your camera so you can appear alongside your screen.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Knight Studio records your microphone for voiceover.</string>
+</dict>
+</plist>

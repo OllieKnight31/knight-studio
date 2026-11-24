@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:11.860
+This tutorial connects Notion, so every video you export is added to a Notion database of your choice, with its link, length, folder and transcript. It takes about four minutes, and you only do it once.
+
+00:00:12.060 --> 00:00:18.400
+First, open Notion’s integrations page from the link in the guide, and press New integration.
+
+00:00:18.600 --> 00:00:26.540
+Give it a name, such as Video Library. Choose the workspace your database lives in, leave the type as Internal, and press Save.
+
+00:00:26.740 --> 00:00:32.170
+On the next page, find Internal Integration Secret. Press Show, then Copy.
+
+00:00:32.370 --> 00:00:39.290
+Back in the app, open Settings, then Databases, and paste it into the box called Integration secret.
+
+00:00:39.490 --> 00:00:50.250
+Now go to Notion and open the database you want your videos in. If you do not have one yet, make a new page and choose Table. Open it as a full page, not inside another page.
+
+00:00:50.450 --> 00:01:00.760
+This is the step people miss. Press the three dots at the top right, choose Connections, and add the integration you just made. Without this, Notion will not let the app see the database.
+
+00:01:00.960 --> 00:01:08.120
+Then copy the link to the database. Press the three dots again and choose Copy link, or copy the address from your browser.
+
+00:01:08.320 --> 00:01:19.230
+Paste that link into Database link, press Save, and then Test connection. The app adds the columns it needs for you, adds a test video, and removes it again. Five ticks means it is working.
+
+00:01:19.430 --> 00:01:29.980
+That is Notion connected. From now on, every video you export appears in your database, with its link, its length, the folder it is filed in, and the full transcript inside the page.

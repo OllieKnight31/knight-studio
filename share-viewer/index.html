@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Video</title>
+<link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap" id="app"><div class="state"><div class="spinner"></div></div></div>
+<script src="player.js"></script>
+<script>
+// A share page whose video and view counts live in the sharer's own Supabase project.
+(() => {
+  const app = document.getElementById('app')
+  const { render, fail, esc, LOGO } = window.KSPlayer
+  const q = new URLSearchParams(location.search)
+  const embed = q.get('embed') === '1'
+  if (embed) document.body.classList.add('embed')
+
+  // Where this video lives: a Supabase project, a storage bucket, and the video's id.
+  const ref = q.get('p'); const direct = q.get('u'); const bucket = q.get('b'); const id = q.get('v')
+  let base = null
+  if (ref && /^[a-z0-9]{6,40}$/i.test(ref)) base = `https://${ref}.supabase.co`
+  else if (direct && /^https?:\/\/[^\s]+$/.test(direct)) base = direct.replace(/\/+$/, '')
+  if (!base || !bucket || !id || !/^[\w-]{4,40}$/.test(id)) return fail(app, 'This link is incomplete', 'Ask whoever sent it to copy the share link again.')
+  const store = `${base}/storage/v1/object/public/${encodeURIComponent(bucket)}`
+  // Only ever load media from the storage the link names.
+  const fromStore = url => typeof url === 'string' && url.startsWith(base + '/storage/v1/object/public/') ? url : null
+
+  fetch(`${store}/share/${encodeURIComponent(id)}/meta.json?t=${Date.now()}`, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json() })
+    .then(m => {
+      const video = fromStore(m.video)
+      if (!video) return fail(app, 'This video is no longer shared', 'The person who shared it has taken it down.')
+      const count = m.count && typeof m.count.url === 'string' && m.count.url.replace(/\/+$/, '') === base && m.count.key ? m.count : null
+      const session = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()).replace(/-/g, '').slice(0, 32)
+      render(app, { ...m, video, poster: fromStore(m.poster) }, {
+        embed,
+        startAt: Number(q.get('t')) || 0,
+        top: `<header class="top">${LOGO}</header>`,
+        record: count && (({ seconds, duration }) => {
+          fetch(`${base}/rest/v1/rpc/ks_record_view`, {
+            method: 'POST', keepalive: true,
+            headers: { 'Content-Type': 'application/json', apikey: count.key, Authorization: `Bearer ${count.key}` },
+            body: JSON.stringify({ p_video: id, p_session: session, p_seconds: seconds, p_duration: duration })
+          }).catch(() => {})
+        })
+      })
+    })
+    .catch(e => /^(400|404)$/.test(e.message)
+      ? fail(app, 'This video is no longer shared', 'The person who shared it has taken it down, or the link is wrong.')
+      : fail(app, 'The video could not be loaded', 'Check your internet connection and try again.'))
+})()
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:09.150
+This tutorial connects Google Drive, so every video you export uploads itself and comes back with a link you can share. It takes about two minutes.
+
+00:00:09.350 --> 00:00:14.220
+Open Settings with the cog at the bottom left, and choose Google Drive.
+
+00:00:14.420 --> 00:00:26.060
+Press Connect Google Drive. Your browser opens on Google’s own sign-in page. Pick your account, and press Allow. The app can only see the folders and files it creates itself, never the rest of your Drive.
+
+00:00:26.260 --> 00:00:37.490
+Back in the app, give the parent folder a name and press Create parent folder. Everything the app uploads goes inside this one folder. You can move or rename it in Drive later, and the app keeps following it.
+
+00:00:37.690 --> 00:00:46.270
+Now press Test Google Drive now. It creates a folder, uploads a file, reads it back, and removes both. Six ticks means it is working.
+
+00:00:46.470 --> 00:00:57.790
+Finally, make a folder in your library. A green message confirms the same folder now exists in Google Drive, with a button to open it. Videos you file there upload into it when you export.
+
+00:00:57.990 --> 00:01:05.380
+That is Google Drive connected. Every export now uploads itself into the matching folder, and gives you a link to share.

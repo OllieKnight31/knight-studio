@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:08.530
+This tutorial connects Airtable, so every video you export is added as a record in a table of your choice. It takes about four minutes.
+
+00:00:08.730 --> 00:00:14.840
+First, open Airtable’s tokens page from the link in the guide, and press Create new token.
+
+00:00:15.040 --> 00:00:25.970
+Give the token a name. Then press Add a scope three times, and add these: data records write, schema bases read, and schema bases write. The last one lets the app create the columns for you.
+
+00:00:26.170 --> 00:00:33.690
+Under Access, press Add a base, and choose the base your table lives in. The token only works for the bases you add here.
+
+00:00:33.890 --> 00:00:39.360
+Press Create token. Airtable shows the token once only, so copy it now.
+
+00:00:39.560 --> 00:00:46.100
+Back in the app, open Settings, then Databases, and paste it into Access token under Airtable.
+
+00:00:46.300 --> 00:00:54.200
+Now open the table you want your videos in, and copy the whole address from the top of your browser. It contains the base and the table.
+
+00:00:54.400 --> 00:01:04.560
+Paste it into Table link, press Save, and then Test connection. The app adds the columns it needs, adds a test record, and removes it again. Five ticks means it is working.
+
+00:01:04.760 --> 00:01:14.240
+That is Airtable connected. Every video you export now appears as a record in your table, with a link to the video, its length, its folder and its transcript.

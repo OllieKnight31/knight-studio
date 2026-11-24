@@ -1,0 +1,31 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:11.260
+This tutorial connects Supabase, so every video you export is added as a row in your own database. Supabase can also store the video file itself. It takes about five minutes.
+
+00:00:11.460 --> 00:00:17.230
+First, open your project in Supabase. Go to Project Settings, and choose A P I.
+
+00:00:17.430 --> 00:00:25.570
+Copy the Project U R L. In the app, open Settings, then Databases, and paste it into Project address under Supabase.
+
+00:00:25.770 --> 00:00:37.530
+Back in Supabase, on the same page, find the key called service role. Press Reveal, then Copy. This key can write to your database, which is why the app keeps it only on this computer and never shows it again.
+
+00:00:37.730 --> 00:00:44.310
+Paste it into Key in the app, leave the table name as videos unless you want a different one, and press Save.
+
+00:00:44.510 --> 00:00:52.280
+Your database needs a table to hold the videos. Press Copy the table setup. It copies a few lines that create that table.
+
+00:00:52.480 --> 00:01:01.530
+In Supabase, open the S Q L Editor from the left menu. Paste what you copied, and press Run. It says Success. You only ever do this once.
+
+00:01:01.730 --> 00:01:09.800
+Back in the app, press Test connection. It finds the table, adds a test video, and removes it again. Four ticks means it is working.
+
+00:01:10.000 --> 00:01:24.410
+One optional extra. To keep the video file itself in Supabase, open Storage, create a bucket called videos, and make it public. Then, in the app, switch on Store the video file too. Large videos may need the upload limit raised in Storage settings.
+
+00:01:24.610 --> 00:01:33.410
+That is Supabase connected. Every video you export now appears as a row in your own database, ready for anything you want to build on top of it.

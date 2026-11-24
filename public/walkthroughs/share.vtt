@@ -1,0 +1,34 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:17.360
+This tutorial sets up share pages. A share page is a link anyone can open to watch your video. It counts how many people watched and for how long, and it can be embedded in any web page. Your videos and your numbers stay in your own Supabase project. It takes about four minutes, and you need Supabase connected first.
+
+00:00:17.560 --> 00:00:27.300
+Open Settings, and choose Share pages. The first step should already say connected. If it does not, connect Supabase under Databases first, then come back.
+
+00:00:27.500 --> 00:00:32.500
+In Supabase, open Storage from the left menu, and press New bucket.
+
+00:00:32.700 --> 00:00:41.280
+Call it videos. Switch on Public bucket. This matters, because it is what lets other people play the video from your link. Then press Create bucket.
+
+00:00:41.480 --> 00:00:53.290
+Next, go to Project Settings, then A P I. Copy the key labelled anon public. Newer projects call it the publishable key. This is the key that is meant to be public. Do not copy the service role key here.
+
+00:00:53.490 --> 00:00:59.690
+Back in the app, type videos into Storage bucket, paste the key into Public key, and press Save.
+
+00:00:59.890 --> 00:01:09.950
+Now press Copy the table setup. It includes the view counter. If you ran an earlier version when you connected Supabase, run it again. It only adds what is missing.
+
+00:01:10.150 --> 00:01:16.770
+In Supabase, open the S Q L Editor, paste what you copied, and press Run. It says Success.
+
+00:01:16.970 --> 00:01:30.460
+Back in the app, press Test share pages. It stores a file, opens it the way a stranger would, counts a test view, reads the numbers back, checks the public key cannot see anything it should not, and cleans up. Seven ticks means it is working.
+
+00:01:30.660 --> 00:01:44.020
+That is the setup done. From now on, when you export a video, the Export panel gives you its link. Press Copy link to send it to someone, or Copy embed code to put the video in a web page. Views and average watch time appear right there.
+
+00:01:44.220 --> 00:01:52.420
+Share pages are ready. Every video you export now gets a link you can send, a count of who watched, and a code to embed it anywhere.

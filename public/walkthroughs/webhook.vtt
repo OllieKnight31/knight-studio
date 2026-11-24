@@ -1,0 +1,28 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:16.530
+This tutorial connects a webhook. A webhook tells another tool the moment you export a video, so that tool can carry on from there: post it in Slack, add it to your C R M, or email it to a client. This example uses Zapier. Make and n 8 n work the same way. It takes about three minutes.
+
+00:00:16.730 --> 00:00:20.370
+In Zapier, press Create, and start a new Zap.
+
+00:00:20.570 --> 00:00:25.890
+For the trigger, search for Webhooks by Zapier, and choose the event called Catch Hook.
+
+00:00:26.090 --> 00:00:32.350
+Zapier now shows a webhook address. It starts with hooks dot zapier dot com. Press Copy.
+
+00:00:32.550 --> 00:00:42.120
+In the app, open Settings, and choose Webhook. Paste the address into Webhook address, and press Save. Leave the signing secret empty unless your tool asks for one.
+
+00:00:42.320 --> 00:00:50.990
+Press Send a test. The app sends a sample video, with every field filled in: the title, the links, the summary, the chapters, and the transcript.
+
+00:00:51.190 --> 00:00:59.580
+Back in Zapier, press Test trigger. The sample video appears, with all of its fields. That is what Zapier will receive after every export.
+
+00:00:59.780 --> 00:01:09.920
+Now add whatever should happen next. For example, a Slack message that includes the title and the share link. Then publish the Zap. From now on, every export triggers it.
+
+00:01:10.120 --> 00:01:16.830
+That is the webhook connected. Every video you export is now announced to your other tools automatically.

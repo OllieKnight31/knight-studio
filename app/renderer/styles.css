@@ -1,0 +1,142 @@
+/* Base tokens and primitives, in Ainable's colours: bone on night. */
+:root {
+  /* Everything else is derived from these. */
+  --accent:    #F5F5F7;
+  --surface:   #0A0A0B;
+  --ink:       #FFFFFF;      /* what surfaces are mixed toward */
+  --on-accent: #0E0E10;      /* text that sits on the accent colour */
+
+  --bg:        var(--surface);
+  --bg-raised: color-mix(in srgb, var(--surface), var(--ink) 3%);
+  --panel:     color-mix(in srgb, var(--surface), var(--ink) 5%);
+  --panel-2:   color-mix(in srgb, var(--surface), var(--ink) 8%);
+  --panel-3:   color-mix(in srgb, var(--surface), var(--ink) 11%);
+  --border:    color-mix(in srgb, var(--surface), var(--ink) 12%);
+  --border-hi: color-mix(in srgb, var(--surface), var(--ink) 19%);
+  --text:      color-mix(in srgb, var(--ink), var(--surface) 7%);
+  --muted:     color-mix(in srgb, var(--ink), var(--surface) 46%);
+  --dim:       color-mix(in srgb, var(--ink), var(--surface) 65%);
+  --well:      color-mix(in srgb, var(--surface), black 22%);
+  --gold:      var(--accent);
+  --gold-dim:  color-mix(in srgb, var(--accent), black 32%);
+  --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --accent-line: color-mix(in srgb, var(--accent) 55%, transparent);
+  --rec:       #E5484D;
+  --ok:        #3DD68C;
+  --radius:    12px;
+  --radius-sm: 8px;
+  --shadow:    0 12px 40px rgba(0,0,0,.55);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; --shadow: 0 12px 40px rgba(0,0,0,.18); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: none; cursor: pointer; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 6px; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--dim); background-clip: content-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+.drag { -webkit-app-region: drag; }
+.no-drag { -webkit-app-region: no-drag; }
+
+/* ---------- primitives ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  background: var(--panel-2); border: 1px solid var(--border);
+  color: var(--text); font-weight: 550; font-size: 12.5px;
+  transition: background .13s, border-color .13s, transform .08s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--panel-3); border-color: var(--border-hi); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn.primary { background: var(--gold); border-color: var(--gold); color: var(--on-accent); font-weight: 700; }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent), white 16%); border-color: color-mix(in srgb, var(--accent), white 16%); }
+.btn.danger { background: var(--rec); border-color: var(--rec); color: #fff; }
+.btn.danger:hover { background: #F05A5F; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--muted); }
+.btn.ghost:hover { background: var(--panel-2); color: var(--text); }
+.btn.sm { padding: 5px 10px; font-size: 11.5px; }
+.btn.icon { padding: 8px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .03em; text-transform: uppercase; }
+.select, .input {
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 8px 10px; width: 100%;
+  outline: none; font-size: 12.5px;
+}
+.select:focus, .input:focus { border-color: var(--gold-dim); }
+
+input[type=range] { -webkit-appearance: none; width: 100%; height: 18px; background: transparent; }
+input[type=range]::-webkit-slider-runnable-track { height: 3px; background: var(--border-hi); border-radius: 3px; }
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: var(--gold); margin-top: -5px; border: none; cursor: grab;
+}
+input[type=range]:active::-webkit-slider-thumb { cursor: grabbing; }
+
+.switch { position: relative; width: 34px; height: 19px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch span {
+  position: absolute; inset: 0; background: var(--border-hi);
+  border-radius: 999px; transition: background .15s; cursor: pointer;
+}
+.switch span::after {
+  content: ''; position: absolute; width: 15px; height: 15px; left: 2px; top: 2px;
+  background: #fff; border-radius: 50%; transition: transform .15s;
+}
+.switch input:checked + span { background: var(--gold); }
+.switch input:checked + span::after { transform: translateX(15px); }
+
+.row { display: flex; align-items: center; gap: 10px; }
+.row.between { justify-content: space-between; }
+.col { display: flex; flex-direction: column; }
+.spacer { flex: 1; }
+.muted { color: var(--muted); }
+.dim { color: var(--dim); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.tag {
+  font-size: 10.5px; font-weight: 600; padding: 2px 7px; border-radius: 5px;
+  background: var(--panel-2); border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ---------- colour + text inputs ---------- */
+input[type=color] {
+  -webkit-appearance: none; width: 30px; height: 26px; padding: 0; flex: none;
+  border: 1px solid var(--border-hi); border-radius: 7px; background: none; cursor: pointer;
+}
+input[type=color]::-webkit-color-swatch-wrapper { padding: 2px; }
+input[type=color]::-webkit-color-swatch { border: none; border-radius: 4px; }
+textarea.input { resize: vertical; min-height: 58px; line-height: 1.4; user-select: text; }
+.input { user-select: text; }
+
+/* ---------- tooltip layer ---------- */
+.tip {
+  position: fixed; z-index: 1000; pointer-events: none; max-width: 250px;
+  padding: 8px 10px; border-radius: 9px; font-size: 11.5px; line-height: 1.45;
+  background: color-mix(in srgb, var(--surface), var(--ink) 16%); color: var(--text);
+  border: 1px solid var(--border-hi); box-shadow: 0 8px 26px rgba(0,0,0,.45);
+  animation: tip-in .09s ease-out;
+}
+.tip b { display: block; font-size: 12px; font-weight: 650; margin-bottom: 2px; }
+.tip kbd {
+  font: inherit; font-size: 10px; font-weight: 650; padding: 1px 5px; margin-left: 7px;
+  border-radius: 4px; background: var(--panel); border: 1px solid var(--border-hi); color: var(--muted);
+}
+@keyframes tip-in { from { opacity: 0; transform: translateY(2px) } to { opacity: 1; transform: none } }
