@@ -1,22 +1,22 @@
-Knight Studio: how to install
+Ainable Studio: how to install
 ==============================
 
 Needs: any Mac running macOS 15 (Sequoia) or later, Apple silicon or Intel.
 To check: Apple menu → About This Mac.
 
-1. Drag "Knight Studio" into your Applications folder.
+1. Drag "Ainable Studio" into your Applications folder.
 
 2. Open it. The first time, macOS will say it cannot verify the app and will not
    open it. That is expected for an app from outside the App Store:
 
      - Click "Done" on that message.
      - Open System Settings → Privacy & Security.
-     - Scroll down to the line about Knight Studio and click "Open Anyway".
+     - Scroll down to the line about Ainable Studio and click "Open Anyway".
      - Confirm with your password or Touch ID.
 
    You only do this once.
 
-3. Knight Studio opens on a system check. Allow the permissions it lists:
+3. Ainable Studio opens on a system check. Allow the permissions it lists:
 
      - Screen & System Audio Recording: required to record.
      - Accessibility: required for automatic zoom (it tracks your clicks).

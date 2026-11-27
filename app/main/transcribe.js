@@ -1,6 +1,6 @@
 'use strict'
 /**
- * Local transcription for Knight Studio clips.
+ * Local transcription for Ainable Studio clips.
  *
  * Drives scripts/transcribe.py (faster-whisper, CPU/int8) out of process so a
  * long transcription never blocks the main process, and caches the result as

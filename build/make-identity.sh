@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Creates a stable self-signed code-signing identity for Knight Studio.
+# Creates a stable self-signed code-signing identity for Ainable Studio.
 #
 # Why this exists: with no Developer ID, the app is ad-hoc signed, and an ad-hoc
 # signature changes every single rebuild. macOS pins privacy grants (Camera,

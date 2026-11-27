@@ -10,7 +10,7 @@
 # hash instead, and every rebuild would silently revoke them.
 set -euo pipefail
 
-APP="${1:-release/mac-universal/Knight Studio.app}"
+APP="${1:-release/mac-universal/Ainable Studio.app}"
 ID="com.knightstudio.app"
 CERT="Knight Studio Code Signing"
 [[ -d "$APP" ]] || { echo "no app bundle at $APP" >&2; exit 1; }

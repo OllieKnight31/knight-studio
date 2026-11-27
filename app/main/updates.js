@@ -11,7 +11,7 @@
  * A copy built without one simply says updates are not switched on.
  *
  * The feed is one JSON file:
- *   { "version": "0.9.1", "url": "https://…/Knight-Studio-0.9.1-mac-universal.zip",
+ *   { "version": "0.9.1", "url": "https://…/Ainable-Studio-0.9.1-mac-universal.zip",
  *     "sha256": "…", "notes": "What changed, in a sentence or two." }
  */
 const { app } = require('electron')

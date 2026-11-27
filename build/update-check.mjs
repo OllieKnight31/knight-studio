@@ -21,11 +21,11 @@ const sleep = ms => new Promise(r => setTimeout(r, ms))
 const home = fs.mkdtempSync(path.join(os.tmpdir(), 'ks-upd-'))
 const apps = path.join(home, 'Applications')
 fs.mkdirSync(apps, { recursive: true })
-const app = path.join(apps, 'Knight Studio.app')
+const app = path.join(apps, 'Ainable Studio.app')
 execFileSync('/usr/bin/ditto', [oldApp, app])
 const plist = k => execFileSync('/usr/bin/plutil', ['-extract', k, 'raw', path.join(app, 'Contents', 'Info.plist')], { encoding: 'utf8' }).trim()
 const oldVersion = plist('CFBundleShortVersionString')
-const settingsDir = path.join(home, 'Library', 'Application Support', 'Knight Studio')
+const settingsDir = path.join(home, 'Library', 'Application Support', 'Ainable Studio')
 fs.mkdirSync(settingsDir, { recursive: true })
 fs.writeFileSync(path.join(settingsDir, 'settings.json'), JSON.stringify({ welcomed: true, tours: { disabled: true }, openAtLogin: false }))
 
@@ -46,7 +46,7 @@ const note = (name, ok, detail = '') => { if (!ok) failed++; console.log(`${ok ?
 
 async function launch (extraEnv = {}) {
   const port = 9300 + Math.floor(Math.random() * 150)
-  const child = spawn(path.join(app, 'Contents', 'MacOS', 'Knight Studio'), [`--remote-debugging-port=${port}`, '-ApplePersistenceIgnoreState', 'YES', `--user-data-dir=${path.join(home, 'ud')}`],
+  const child = spawn(path.join(app, 'Contents', 'MacOS', 'Ainable Studio'), [`--remote-debugging-port=${port}`, '-ApplePersistenceIgnoreState', 'YES', `--user-data-dir=${path.join(home, 'ud')}`],
     { env: { ...process.env, HOME: home, KS_DRIVE_CONFIG_DIR: '/nonexistent', KS_UPDATE_FEED: feedUrl, KS_UPDATE_NO_REOPEN: '1', ...extraEnv }, stdio: 'ignore' })
   let page
   for (let i = 0; i < 160 && !page; i++) { await sleep(250); try { page = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page' && /index\.html/.test(t.url) && !/#overlay/.test(t.url)) } catch {} }

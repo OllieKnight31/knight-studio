@@ -26,14 +26,14 @@ const drive = require('../app/main/drive.js')
 if (!(await drive.isConfigured())) { console.error('Google Drive is not connected on this Mac.'); process.exit(2) }
 
 const home = fs.mkdtempSync(path.join(os.tmpdir(), 'ks-dshare-'))
-const lib = path.join(home, 'Movies', 'Knight Studio')
-const settingsDir = path.join(home, 'Library', 'Application Support', 'Knight Studio')
+const lib = path.join(home, 'Movies', 'Ainable Studio')
+const settingsDir = path.join(home, 'Library', 'Application Support', 'Ainable Studio')
 const out = path.join(home, 'out')
 for (const d of [lib, settingsDir, out]) fs.mkdirSync(d, { recursive: true })
-const model = path.join(os.homedir(), 'Library', 'Application Support', 'Knight Studio', 'models', 'ggml-base.bin')
+const model = path.join(os.homedir(), 'Library', 'Application Support', 'Ainable Studio', 'models', 'ggml-base.bin')
 if (fs.existsSync(model)) { fs.mkdirSync(path.join(settingsDir, 'models'), { recursive: true }); try { fs.linkSync(model, path.join(settingsDir, 'models', 'ggml-base.bin')) } catch { fs.copyFileSync(model, path.join(settingsDir, 'models', 'ggml-base.bin')) } }
 
-const folder = await drive.createFolder(`Knight Studio share test ${Date.now()} (safe to delete)`)
+const folder = await drive.createFolder(`Ainable Studio share test ${Date.now()} (safe to delete)`)
 fs.writeFileSync(path.join(settingsDir, 'settings.json'), JSON.stringify({
   welcomed: true, tours: { disabled: true }, openAtLogin: false, exportDirect: false,
   brand: { name: 'Acme Training', accent: '#3B82F6', surface: '#0B1020' },   // an older version's saved brand: must be ignored

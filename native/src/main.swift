@@ -3,7 +3,7 @@ import Cocoa
 import ScreenCaptureKit
 import AVFoundation
 
-// knightcap — the native capture engine behind Knight Studio.
+// knightcap — the native capture engine behind Ainable Studio.
 //
 //   knightcap list
 //   knightcap permissions
@@ -22,7 +22,7 @@ func arg(_ name: String) -> String? {
 func flag(_ name: String) -> Bool { CommandLine.arguments.contains("--\(name)") }
 
 guard #available(macOS 15.0, *) else {
-    Log.fail("Knight Studio needs macOS 15 or newer")
+    Log.fail("Ainable Studio needs macOS 15 or newer")
 }
 
 let command = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "help"

@@ -28,7 +28,7 @@ export function applyBrand () {
   root.style.setProperty('--ink', '#FFFFFF')
   root.style.setProperty('--on-accent', '#0E0E10')
   root.dataset.theme = 'dark'
-  document.title = 'Knight Studio'
+  document.title = 'Ainable Studio'
 }
 
 export const fileURL = p => 'knight://file' + String(p).split('/').map(encodeURIComponent).join('/')

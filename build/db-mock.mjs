@@ -34,7 +34,7 @@ export async function startMock () {
       if (auth !== 'Bearer notion-good') return reply(401, { code: 'unauthorized', message: 'API token is invalid.' })
       if (req.headers['notion-version'] !== '2022-06-28') return reply(400, { message: 'missing version' })
       const p = u.pathname.slice(7)
-      if (p === '/users/me') return reply(200, { name: 'Knight Studio', type: 'bot' })
+      if (p === '/users/me') return reply(200, { name: 'Ainable Studio', type: 'bot' })
       const db = /^\/databases\/([0-9a-f]{32})$/.exec(p)
       if (db) {
         if (!state.notion.shared) return reply(404, { code: 'object_not_found', message: 'Could not find database.' })

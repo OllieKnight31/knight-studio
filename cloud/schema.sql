@@ -1,4 +1,4 @@
--- Knight Studio sharing service: the database.
+-- Ainable Studio sharing service: the database.
 --
 -- One Supabase project, run by whoever publishes the app, holds every customer's
 -- workspaces, people, shared videos and watch history. Run this whole file in that

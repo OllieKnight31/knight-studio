@@ -27,8 +27,8 @@ if (!projectSrc || !fs.existsSync(path.join(projectSrc, 'project.json'))) {
 }
 const root = new URL('..', import.meta.url).pathname.replace(/\/$/, '')
 const home = fs.mkdtempSync(path.join(os.tmpdir(), 'ks-sweep-'))
-const lib = path.join(home, 'Movies', 'Knight Studio')
-const settingsDir = path.join(home, 'Library', 'Application Support', 'Knight Studio')
+const lib = path.join(home, 'Movies', 'Ainable Studio')
+const settingsDir = path.join(home, 'Library', 'Application Support', 'Ainable Studio')
 const assets = path.join(home, 'assets')
 const out = path.join(home, 'out')
 for (const d of [lib, settingsDir, assets, out, path.join(home, 'Moved library'), path.join(home, 'Exports here')]) fs.mkdirSync(d, { recursive: true })
@@ -44,7 +44,7 @@ for (const f of ['transcript.json']) {
   for (const c of fs.readdirSync(path.join(lib, PID, 'clips'))) fs.rmSync(path.join(lib, PID, 'clips', c, f), { force: true })
 }
 // The speech model, if this Mac has one, so captions can be tested without a download.
-const model = path.join(os.homedir(), 'Library', 'Application Support', 'Knight Studio', 'models', 'ggml-base.bin')
+const model = path.join(os.homedir(), 'Library', 'Application Support', 'Ainable Studio', 'models', 'ggml-base.bin')
 if (fs.existsSync(model)) {
   fs.mkdirSync(path.join(settingsDir, 'models'), { recursive: true })
   try { fs.linkSync(model, path.join(settingsDir, 'models', 'ggml-base.bin')) } catch { fs.copyFileSync(model, path.join(settingsDir, 'models', 'ggml-base.bin')) }
@@ -257,7 +257,7 @@ await check('Branding', 'the app wears the Ainable logo and colours, whatever an
   const b = (await window.__t.prefs()).brand
   return {
     ok: accent === '#F5F5F7' && surface === '#0A0A0B' && document.documentElement.dataset.theme === 'dark' && logo?.getAttribute('aria-label') === 'Ainable' && box.width > 60 && box.height > 14 &&
-      b.accent === '#F5F5F7' && b.surface === '#0A0A0B' && !b.logo && after.brand.accent === '#F5F5F7' && getComputedStyle(document.body).backgroundColor === 'rgb(10, 10, 11)' && document.title === 'Knight Studio',
+      b.accent === '#F5F5F7' && b.surface === '#0A0A0B' && !b.logo && after.brand.accent === '#F5F5F7' && getComputedStyle(document.body).backgroundColor === 'rgb(10, 10, 11)' && document.title === 'Ainable Studio',
     detail: `accent ${accent} · background ${surface} · logo “${logo?.getAttribute('aria-label')}” ${Math.round(box?.width)}×${Math.round(box?.height)} · saved brand ${b.accent}/${b.surface}`
   }
 }))
@@ -308,7 +308,7 @@ await check('Files', 'recordings folder: back to the default', String(async () =
   const section = all('.modal-body section').find(s => /Recordings folder/.test(s.textContent))
   click(find('.btn', 'Use the default', section)); await w(2500)
   const list = await window.knight.projects.list()
-  return { ok: /Movies\/Knight Studio$/.test(txt(section.querySelector('.path'))) && list.some(p => p.id === 'prj_sweep0000000') }
+  return { ok: /Movies\/Ainable Studio$/.test(txt(section.querySelector('.path'))) && list.some(p => p.id === 'prj_sweep0000000') }
 }))
 
 await check('Files', '“Show in Finder” has a handler', String(async () => typeof window.knight.shell.open === 'function'))

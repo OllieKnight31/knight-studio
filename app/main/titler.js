@@ -1,6 +1,6 @@
 'use strict'
 /**
- * Automatic video titles for Knight Studio clips.
+ * Automatic video titles for Ainable Studio clips.
  *
  * Two ways in, one way out. If the clip has a transcript with real speech we
  * hand Claude the words; if it doesn't — a silent screen recording, which is

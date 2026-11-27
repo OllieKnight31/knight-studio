@@ -9,8 +9,8 @@
 set -euo pipefail
 
 IDENTITY="${KS_IDENTITY:-Knight Studio Code Signing}"
-SRC="release/mac-universal/Knight Studio.app"
-DEST="/Applications/Knight Studio.app"
+SRC="release/mac-universal/Ainable Studio.app"
+DEST="/Applications/Ainable Studio.app"
 
 [ -d "$SRC" ] || { echo "no build at $SRC — run 'npm run dist' first" >&2; exit 1; }
 # Note: the identity is self-signed, so `find-identity -v` (valid only) will not
@@ -30,7 +30,7 @@ fi
 bash "$(dirname "${BASH_SOURCE[0]}")/sign-app.sh" "$SRC" "$IDENTITY"
 
 echo "→ installing to $DEST"
-pkill -f "Knight Studio.app/Contents/MacOS/Knight Studio" 2>/dev/null || true
+pkill -f "Ainable Studio.app/Contents/MacOS/Ainable Studio" 2>/dev/null || true
 sleep 1
 rm -rf "$DEST"
 cp -R "$SRC" "$DEST"

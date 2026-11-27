@@ -1,7 +1,7 @@
 {
   "name": "knight-studio",
-  "productName": "Knight Studio",
-  "version": "0.12.0",
+  "productName": "Ainable Studio",
+  "version": "0.13.0",
   "description": "Screen + camera recorder and editor. Local-first, macOS native capture.",
   "main": "app/main/index.js",
   "private": true,
@@ -13,14 +13,14 @@
     "start": "electron .",
     "setup": "npm install && bash scripts/fetch-ffmpeg.sh && npm run native",
     "dist": "npm run native && bash scripts/fetch-ffmpeg.sh && npm run build:renderer && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --universal",
-    "app": "open -a 'Knight Studio'",
+    "app": "open -a 'Ainable Studio'",
     "pack": "npm run native && bash scripts/fetch-ffmpeg.sh && npm run build:renderer && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --universal --dir",
     "check:ipc": "node build/check-ipc.js",
     "install:app": "bash scripts/install.sh",
     "release": "npm run dist && npm run install:app",
     "package": "bash scripts/package-public.sh"
   },
-  "author": "Knight Studio",
+  "author": "Ainable Studio",
   "license": "UNLICENSED",
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
@@ -39,7 +39,7 @@
   },
   "build": {
     "appId": "com.knightstudio.app",
-    "productName": "Knight Studio",
+    "productName": "Ainable Studio",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -104,9 +104,9 @@
       "hardenedRuntime": false,
       "gatekeeperAssess": false,
       "extendInfo": {
-        "NSCameraUsageDescription": "Knight Studio records your camera so you can appear alongside your screen.",
-        "NSMicrophoneUsageDescription": "Knight Studio records your microphone for voiceover.",
-        "NSAppleEventsUsageDescription": "Knight Studio uses system events to control recording.",
+        "NSCameraUsageDescription": "Ainable Studio records your camera so you can appear alongside your screen.",
+        "NSMicrophoneUsageDescription": "Ainable Studio records your microphone for voiceover.",
+        "NSAppleEventsUsageDescription": "Ainable Studio uses system events to control recording.",
         "LSMinimumSystemVersion": "15.0",
         "LSUIElement": false
       },

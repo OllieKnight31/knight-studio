@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Knight Studio — local transcription backend.
+Ainable Studio — local transcription backend.
 
 Extracts a single audio track out of a clip's screen.mov with ffmpeg, runs it
 through faster-whisper (CTranslate2, CPU/int8) with word-level timestamps and
@@ -425,7 +425,7 @@ def write_json(path: Path, payload: dict) -> None:
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="transcribe.py",
-        description="Transcribe one audio track of a Knight Studio clip.",
+        description="Transcribe one audio track of a Ainable Studio clip.",
     )
     p.add_argument("--input", "-i", help="Path to screen.mov")
     p.add_argument(

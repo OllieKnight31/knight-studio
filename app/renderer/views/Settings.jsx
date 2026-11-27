@@ -139,7 +139,7 @@ const clean = e => String(e?.message || e).replace(/^Error invoking remote metho
 function DriveTab ({ prefs, savePrefs, setPrefs, onLibraryChanged }) {
   const [status, setStatus] = useState(null)
   const [link, setLink] = useState('')
-  const [name, setName] = useState('Knight Studio')
+  const [name, setName] = useState('Ainable Studio')
   const [busy, setBusy] = useState(false)
   const [waiting, setWaiting] = useState(false)   // browser sign-in in progress
   const [msg, setMsg] = useState(null)            // { kind, text }

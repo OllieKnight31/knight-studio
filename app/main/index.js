@@ -138,7 +138,7 @@ ipcMain.handle('system:openPrivacy', (_e, which) => {
   return shell.openExternal(`x-apple.systempreferences:com.apple.preference.security?${pane}`)
 })
 
-// Ask macOS directly for camera and microphone. These land against Knight Studio, and
+// Ask macOS directly for camera and microphone. These land against Ainable Studio, and
 // the capture engine now shares the app's bundle identity, so one grant covers both.
 /**
  * Asks macOS for Accessibility, which is the only way the app ever appears in that
@@ -146,7 +146,7 @@ ipcMain.handle('system:openPrivacy', (_e, which) => {
  * because macOS only lists apps that have actually requested the permission.
  *
  * Returns true when already trusted. Otherwise it registers the request (which adds
- * Knight Studio to the list, pre-ticked or ready to tick) and shows the system prompt.
+ * Ainable Studio to the list, pre-ticked or ready to tick) and shows the system prompt.
  */
 ipcMain.handle('system:askAccessibility', async () => {
   const trusted = systemPreferences.isTrustedAccessibilityClient(false)
@@ -169,7 +169,7 @@ ipcMain.handle('sources:list', async (_e, { width = 640, height = 400 } = {}) =>
     thumbnailSize: { width, height },
     fetchWindowIcons: false
   })
-  // Knight Studio's own windows are hidden the moment recording starts, so
+  // Ainable Studio's own windows are hidden the moment recording starts, so
   // picking one gives a capture of nothing. Keep them out of the list entirely.
   const ownTitles = new Set(BrowserWindow.getAllWindows().map(w => w.getTitle()).filter(Boolean))
   ownTitles.add(app.getName())
@@ -819,7 +819,7 @@ async function adoptDriveParent (parent) {
 ipcMain.handle('drive:setParent', async (_e, link) => adoptDriveParent(await drive.getFolder(link)))
 
 ipcMain.handle('drive:createParent', async (_e, name) => {
-  const clean = String(name || '').trim() || 'Knight Studio'
+  const clean = String(name || '').trim() || 'Ainable Studio'
   return adoptDriveParent(await drive.ensureFolderIn(clean, 'root').then(f => ({ id: f.id, name: f.name, link: f.link })))
 })
 
@@ -1339,7 +1339,7 @@ ipcMain.handle('overlay:resize', (_e, { width, height }) => {
 })
 
 /**
- * Earlier versions uploaded into a "Knight Studio" folder at the top of My Drive
+ * Earlier versions uploaded into a "Ainable Studio" folder at the top of My Drive
  * without asking. If this account has that folder and no parent has been chosen yet,
  * it becomes the parent, so uploads carry on landing where they always did. Checked
  * once; after that the parent is whatever Settings says.

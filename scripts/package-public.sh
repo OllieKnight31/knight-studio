@@ -1,9 +1,9 @@
 #!/bin/bash
-# Builds the copy of Knight Studio that other people download.
+# Builds the copy of Ainable Studio that other people download.
 #
 #   npm run package
 #
-# Produces release/Knight-Studio-<version>-mac-universal.zip containing the app and a
+# Produces release/Ainable-Studio-<version>-mac-universal.zip containing the app and a
 # short install note.
 #
 # Two levels of polish, depending on what is available:
@@ -24,9 +24,9 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 VERSION="$(node -p "require('./package.json').version")"
-APP="release/mac-universal/Knight Studio.app"
-STAGE="release/Knight Studio"
-ZIP="release/Knight-Studio-$VERSION-mac-universal.zip"
+APP="release/mac-universal/Ainable Studio.app"
+STAGE="release/Ainable Studio"
+ZIP="release/Ainable-Studio-$VERSION-mac-universal.zip"
 
 npm run dist
 

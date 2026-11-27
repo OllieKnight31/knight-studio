@@ -14,14 +14,14 @@
     macOS, which refuses screen capture outright ("the user declined TCCs for
     application, window, display capture") even while CGPreflightScreenCaptureAccess
     still reports true. CFBundleName is what the user sees in Privacy settings, so it
-    still reads as Knight Studio there.
+    still reads as Ainable Studio there.
   -->
   <key>CFBundleIdentifier</key>
   <string>knightcap</string>
   <key>CFBundleName</key>
-  <string>Knight Studio</string>
+  <string>Ainable Studio</string>
   <key>CFBundleDisplayName</key>
-  <string>Knight Studio</string>
+  <string>Ainable Studio</string>
   <key>CFBundleExecutable</key>
   <string>knightcap</string>
   <key>CFBundlePackageType</key>
@@ -33,8 +33,8 @@
   <key>LSUIElement</key>
   <true/>
   <key>NSCameraUsageDescription</key>
-  <string>Knight Studio records your camera so you can appear alongside your screen.</string>
+  <string>Ainable Studio records your camera so you can appear alongside your screen.</string>
   <key>NSMicrophoneUsageDescription</key>
-  <string>Knight Studio records your microphone for voiceover.</string>
+  <string>Ainable Studio records your microphone for voiceover.</string>
 </dict>
 </plist>

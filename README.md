@@ -1,12 +1,20 @@
-# Knight Studio
+# Ainable Studio
 
 A screen and camera recorder for macOS with a built-in editor. Record your screen and
 yourself together, cut and trim the take, remove the dead space, and export a finished
 MP4. Think of it as a Loom replacement that runs on your own Mac: no account, no
 subscription, no watermark, and nothing is uploaded unless you connect a service yourself.
 
-Version 0.12.0. Built with Electron and React (the app), Swift (the capture engine) and
+Version 0.13.0 (called Knight Studio before 0.13.0). Built with Electron and React (the app), Swift (the capture engine) and
 ffmpeg (audio and export).
+
+## Download (no building needed)
+
+Get `Ainable-Studio-0.13.0-mac-universal.zip` from the
+[latest release](https://github.com/OllieKnight31/ainable-studio/releases/latest), unzip it and follow the
+`INSTALL.txt` inside: drag the app into Applications, then the first time open
+System Settings, Privacy & Security and press **Open Anyway** (the app is not notarised by Apple).
+Building from source, below, is only needed if you want to change the code.
 
 ## What it does
 
@@ -41,12 +49,12 @@ Open Terminal, go into this folder, then run these one at a time:
 ```bash
 npm run setup        # installs dependencies, fetches ffmpeg, builds the capture engine
 npm run release      # builds the app and installs it into /Applications
-open -a "Knight Studio"
+open -a "Ainable Studio"
 ```
 
 `npm run setup` is the same as running `npm install`, `bash scripts/fetch-ffmpeg.sh` and
 `npm run native` yourself. `npm run release` takes a few minutes and finishes by copying
-**Knight Studio.app** into your Applications folder. If a copy is already open it is closed first.
+**Ainable Studio.app** into your Applications folder. If a copy is already open it is closed first.
 
 During `npm run release` you will see the line "signing identity not found, using ad-hoc
 signing instead". That is normal on a new Mac and the app works. See "Keeping permissions
@@ -60,7 +68,7 @@ npm run dev
 ```
 
 This opens the app straight from the source with live reload. macOS will list it as
-"Electron" in the permission panes rather than "Knight Studio".
+"Electron" in the permission panes rather than "Ainable Studio".
 
 ## Permissions to grant
 
@@ -77,7 +85,7 @@ your first recording.
 
 Camera and Microphone show a normal macOS prompt. Screen Recording and Accessibility can
 only be switched on by you: the Allow button opens the right pane in System Settings,
-Privacy & Security. Turn on the switch next to Knight Studio, then quit and reopen the app
+Privacy & Security. Turn on the switch next to Ainable Studio, then quit and reopen the app
 when macOS asks, and press **Check again**.
 
 Accessibility is the one people miss. Without it the app still records, but auto zoom has
@@ -85,7 +93,7 @@ nothing to work from.
 
 ## Your first recording
 
-1. Open Knight Studio and click **New recording**.
+1. Open Ainable Studio and click **New recording**.
 2. Pick the screen or window, your microphone, and a camera if you want to appear.
 3. Check the four permission dots are green, then press record. A short countdown runs
    and a small floating bar appears with a timer, pause and stop.
@@ -94,10 +102,10 @@ nothing to work from.
    select a section and press Delete to remove it, or click **Dead space** to cut the pauses.
 6. Press `E` (or the Export tool), choose the quality, and click **Export MP4**.
 
-Recordings are kept in `~/Movies/Knight Studio/`. Exports go to Downloads unless you choose
+Recordings are kept in `~/Movies/Ainable Studio/`. Exports go to Downloads unless you choose
 another folder in Settings, Files.
 
-Shortcuts that work from any app while Knight Studio is running: `Cmd+Shift+7` records the
+Shortcuts that work from any app while Ainable Studio is running: `Cmd+Shift+7` records the
 screen, `Cmd+Shift+8` records screen plus camera, and `Cmd+Shift+8` again stops.
 
 In the editor: `Space` play or pause, arrow keys step a frame, `S` split, Delete removes
@@ -148,14 +156,14 @@ macOS may ask for your login password while it adds the certificate.
 | Recording fails straight away | Screen & System Audio Recording is off, or was granted to an older build. Switch it off and on again in System Settings, then reopen the app. |
 | Recording works but there are no zooms | Accessibility is off. Grant it, quit and reopen the app. Older takes cannot be fixed; record again. |
 | Permissions are asked for again after every rebuild | See "Keeping permissions across rebuilds". |
-| A permission dot stays red after you granted it | Quit the app fully (Cmd+Q) and reopen. If it persists, remove Knight Studio from that list in System Settings and grant it again. |
-| `Cmd+Shift+7` or `8` does nothing | Another app owns that shortcut, or Knight Studio is not running. Use the Dock icon menu instead. |
+| A permission dot stays red after you granted it | Quit the app fully (Cmd+Q) and reopen. If it persists, remove Ainable Studio from that list in System Settings and grant it again. |
+| `Cmd+Shift+7` or `8` does nothing | Another app owns that shortcut, or Ainable Studio is not running. Use the Dock icon menu instead. |
 | No sound from the microphone | Check the level meter in the recorder. The app can also raise the macOS input volume for you. |
 | Captions say the model is missing | Open Settings, Captions & titles and download it. Needs internet once. |
 | Export is slow or fails | Close other heavy apps and check free disk space. Run `npm run build:renderer` then `KS_DIST=1 KS_DEBUG=1 npm start` to see the detailed log. |
 
-To remove the app: delete it from Applications, then delete `~/Movies/Knight Studio`
-(your recordings) and `~/Library/Application Support/Knight Studio` (settings, keys,
+To remove the app: delete it from Applications, then delete `~/Movies/Ainable Studio`
+(your recordings) and `~/Library/Application Support/Ainable Studio` (settings, keys,
 speech models).
 
 ## For developers
@@ -183,7 +191,7 @@ node build/cloud-rules.mjs   # sharing access rules (needs: brew install postgre
 npm run package              # a zip of the app to hand to someone else
 ```
 
-`npm run package` produces `release/Knight-Studio-<version>-mac-universal.zip` with an
+`npm run package` produces `release/Ainable-Studio-<version>-mac-universal.zip` with an
 install note inside. Without an Apple Developer ID the person receiving it has to approve
 it once under System Settings, Privacy & Security, Open Anyway.
 

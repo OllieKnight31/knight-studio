@@ -175,7 +175,7 @@ export default function Recorder ({ projectId, folderId, onCancel, onDone }) {
     if (key === 'camera' || key === 'microphone') {
       await window.knight.system.askMedia(key === 'camera' ? 'camera' : 'microphone')
     } else if (key === 'accessibility') {
-      // Opening the pane alone shows a list Knight Studio is not in — macOS only lists
+      // Opening the pane alone shows a list Ainable Studio is not in — macOS only lists
       // apps that have actually asked. Asking first puts it there ready to switch on.
       const res = await window.knight.system.askAccessibility()
       if (!res?.trusted) {
@@ -343,13 +343,13 @@ export default function Recorder ({ projectId, folderId, onCancel, onDone }) {
             {needsRestart && (
               <div className="col" style={{ gap: 7 }}>
                 <p className="panel-sub muted" style={{ margin: 0 }}>
-                  <strong>Knight Studio</strong> is now in the Accessibility list that just
+                  <strong>Ainable Studio</strong> is now in the Accessibility list that just
                   opened — switch it on there. macOS does not let an app tick that box for
                   you, which is the whole point of it. Then relaunch, because the click
                   listener only attaches on a fresh start.
                 </p>
                 <button className="btn sm" onClick={() => window.knight.system.relaunch()}>
-                  Relaunch Knight Studio
+                  Relaunch Ainable Studio
                 </button>
                 <button className="btn sm ghost" onClick={() => window.knight.system.openPrivacy('accessibility')}>
                   Open the list again

@@ -51,7 +51,7 @@ function payload (event, video = {}) {
   return {
     event,                                   // "video.exported" or "test"
     sentAt: new Date().toISOString(),
-    app: { name: 'Knight Studio', version: version() },
+    app: { name: 'Ainable Studio', version: version() },
     video: {
       id: video.id || '',
       title: video.title || '',

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Signs a built Knight Studio.app, inside-out, with whatever identity it is given.
+# Signs a built Ainable Studio.app, inside-out, with whatever identity it is given.
 #
 #   sign-app.sh <path to .app> <identity> [--hardened]
 #

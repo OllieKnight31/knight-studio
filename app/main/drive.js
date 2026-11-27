@@ -518,7 +518,7 @@ async function moveItem (id, toParentId) {
   return true
 }
 
-/** The "Knight Studio" folder older versions uploaded into, if this account has one. */
+/** The "Knight Studio" folder older versions (before the rename) uploaded into, if this account has one. */
 async function findLegacyFolder () {
   const q = [`mimeType = '${FOLDER_MIME}'`, "name = 'Knight Studio'", 'trashed = false', "'root' in parents"].join(' and ')
   const found = await api('GET',

@@ -5,14 +5,21 @@ const os = require('node:os')
 
 // Settings live outside the recordings folder, because the recordings folder is itself
 // a setting — it can be moved, and the app still has to find its settings afterwards.
-const FILE = path.join(os.homedir(), 'Library', 'Application Support', 'Knight Studio', 'settings.json')
+// The app was called Knight Studio before 0.13.0. A Mac that already has the old folders
+// keeps using them (nothing is moved or copied); a new install gets the Ainable Studio names.
+const pickDir = (base, name, oldName) => {
+  const fresh = path.join(base, name), old = path.join(base, oldName)
+  return !fs.existsSync(fresh) && fs.existsSync(old) ? old : fresh
+}
+const SUPPORT_DIR = pickDir(path.join(os.homedir(), 'Library', 'Application Support'), 'Ainable Studio', 'Knight Studio')
+const FILE = path.join(SUPPORT_DIR, 'settings.json')
 const LEGACY_FILE = path.join(os.homedir(), 'Movies', 'Knight Studio', 'preferences.json')
-const DEFAULT_LIBRARY = path.join(os.homedir(), 'Movies', 'Knight Studio')
+const DEFAULT_LIBRARY = pickDir(path.join(os.homedir(), 'Movies'), 'Ainable Studio', 'Knight Studio')
 
 // The app wears one brand — Ainable's — and it is not a setting. Anything an older
 // version saved under `brand` is ignored.
 const BRAND = Object.freeze({
-  name: 'Knight Studio',
+  name: 'Ainable Studio',
   accent: '#F5F5F7',    // bone
   surface: '#0A0A0B'    // night
 })
@@ -33,7 +40,7 @@ const DEFAULTS = {
   // hotkeys available at any moment rather than only after you launch it.
   openAtLogin: true,
   brand: BRAND,
-  libraryDir: null,      // null = ~/Movies/Knight Studio
+  libraryDir: null,      // null = ~/Movies/Ainable Studio
   exportDir: null,       // null = ~/Downloads
   // true = Export saves straight into the export folder, with no save window.
   exportDirect: false,
