@@ -459,6 +459,7 @@ function CaptionsTab ({ prefs, savePrefs }) {
 
 function SystemTab ({ setTab, prefs, savePrefs }) {
   const [info, setInfo] = useState(null)
+  const [restart, setRestart] = useState(false)
   const refresh = useCallback(() => { setInfo(null); window.knight.system.check().then(setInfo).catch(() => setInfo({ failed: true })) }, [])
   useEffect(() => { refresh() }, [refresh])
 
@@ -476,7 +477,23 @@ function SystemTab ({ setTab, prefs, savePrefs }) {
       {action}
     </div>
   )
-  const open = which => <button className="btn sm" onClick={() => window.knight.system.openPrivacy(which)}>Open System Settings</button>
+  // Screen Recording and Accessibility only list an app that has asked, so ask first.
+  const allow = async which => {
+    if (which === 'screenRecording') {
+      const r = await window.knight.system.askScreen()
+      if (r?.granted) return refresh()
+      setRestart(true)
+    } else if (which === 'accessibility') {
+      const r = await window.knight.system.askAccessibility()
+      if (r?.trusted) return refresh()
+      setRestart(true)
+    } else if (which === 'camera' || which === 'microphone') {
+      await window.knight.system.askMedia(which)
+      return refresh()
+    }
+    await window.knight.system.openPrivacy(which)
+  }
+  const open = which => <button className="btn sm" onClick={() => allow(which)}>Allow</button>
 
   return (
     <>
@@ -486,6 +503,12 @@ function SystemTab ({ setTab, prefs, savePrefs }) {
           Everything the app relies on. A red dot means something will not work until it is fixed; grey is
           optional. macOS asks for each permission once — after allowing one, press “Check again”.
         </p>
+        {restart && (
+          <div className="notice">
+            Switch on Ainable Studio in the System Settings list that just opened, then relaunch so macOS applies it.{' '}
+            <button className="btn sm" onClick={() => window.knight.system.relaunch()}>Relaunch Ainable Studio</button>
+          </div>
+        )}
         <Line ok={info.engine} label="Recording engine" detail={info.engine ? 'Built in and ready.' : 'Missing from this copy of the app — download it again.'} />
         <Line ok={info.ffmpeg} label="Video and audio processing" detail={info.ffmpeg ? 'Built in and ready.' : 'Missing from this copy of the app — exports and thumbnails will fail.'} />
         <Line ok={info.captions.ok && (info.captions.engine !== 'whisper.cpp' || !!info.captions.model)} optional={info.captions.ok}

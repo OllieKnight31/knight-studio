@@ -42,6 +42,11 @@ async function listDevices () {
   return res.data
 }
 
+async function requestScreen () {
+  const res = await runOnce(['request-screen'], 60000)
+  return !!res.data?.screenRecording
+}
+
 async function requestPermissions () {
   const res = await runOnce(['permissions'], 120000)
   return res.data
@@ -125,4 +130,4 @@ class CaptureSession extends EventEmitter {
   }
 }
 
-module.exports = { listDevices, requestPermissions, CaptureSession, binaryPath }
+module.exports = { requestScreen, listDevices, requestPermissions, CaptureSession, binaryPath }

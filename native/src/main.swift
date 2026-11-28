@@ -34,6 +34,12 @@ case "list":
     Task { await ListCommand.run(); sem.signal() }
     sem.wait()
 
+case "request-screen":
+    // Registers this app in Screen & System Audio Recording and shows the system
+    // prompt. Without a request macOS leaves the app out of that list entirely.
+    if !CGPreflightScreenCaptureAccess() { _ = CGRequestScreenCaptureAccess() }
+    Log.event(["event": "screen", "data": ["screenRecording": CGPreflightScreenCaptureAccess()]])
+
 case "permissions":
     // Requesting screen access shows the system prompt on first run.
     let screen = CGPreflightScreenCaptureAccess()

@@ -54,6 +54,7 @@ const api = {
   },
   system: {
     openPrivacy: which => ipcRenderer.invoke('system:openPrivacy', which),
+    askScreen: () => ipcRenderer.invoke('system:askScreen'),
     askMedia: kind => ipcRenderer.invoke('system:askMedia', kind),
     askAccessibility: () => ipcRenderer.invoke('system:askAccessibility'),
     relaunch: () => ipcRenderer.invoke('app:relaunch'),

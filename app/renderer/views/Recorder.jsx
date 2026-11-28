@@ -180,7 +180,14 @@ export default function Recorder ({ projectId, folderId, onCancel, onDone }) {
       const res = await window.knight.system.askAccessibility()
       if (!res?.trusted) {
         await window.knight.system.openPrivacy('accessibility')
-        setNeedsRestart(true)
+        setNeedsRestart(n => n || 'accessibility')
+      }
+    } else if (key === 'screenRecording') {
+      // The pane only lists apps that have asked, so ask first, then open it.
+      const res = await window.knight.system.askScreen()
+      if (!res?.granted) {
+        await window.knight.system.openPrivacy('screenRecording')
+        setNeedsRestart('screenRecording')
       }
     } else {
       await window.knight.system.openPrivacy(key)
@@ -343,15 +350,18 @@ export default function Recorder ({ projectId, folderId, onCancel, onDone }) {
             {needsRestart && (
               <div className="col" style={{ gap: 7 }}>
                 <p className="panel-sub muted" style={{ margin: 0 }}>
-                  <strong>Ainable Studio</strong> is now in the Accessibility list that just
-                  opened — switch it on there. macOS does not let an app tick that box for
-                  you, which is the whole point of it. Then relaunch, because the click
-                  listener only attaches on a fresh start.
+                  {needsRestart === 'screenRecording'
+                    ? <><strong>Ainable Studio</strong> is now in the Screen &amp; System Audio Recording
+                      list that just opened. Switch it on there (if it is already on, switch it off and on
+                      again). macOS only applies it after a fresh start, so press Relaunch below.</>
+                    : <><strong>Ainable Studio</strong> is now in the Accessibility list that just
+                      opened. Switch it on there. macOS does not let an app tick that box for
+                      you. Then relaunch, because the click listener only attaches on a fresh start.</>}
                 </p>
                 <button className="btn sm" onClick={() => window.knight.system.relaunch()}>
                   Relaunch Ainable Studio
                 </button>
-                <button className="btn sm ghost" onClick={() => window.knight.system.openPrivacy('accessibility')}>
+                <button className="btn sm ghost" onClick={() => window.knight.system.openPrivacy(needsRestart === 'screenRecording' ? 'screenRecording' : 'accessibility')}>
                   Open the list again
                 </button>
               </div>

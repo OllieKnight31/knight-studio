@@ -204,6 +204,21 @@ ipcMain.handle('system:setInputVolume', async (_e, level) => {
   } catch { return null }
 })
 
+/**
+ * Screen Recording: macOS only lists an app in that pane after the app has asked for
+ * it, so opening the pane alone shows nothing to switch on. Ask from the app itself
+ * (desktopCapturer) and from the capture engine, then report whether it is on.
+ */
+ipcMain.handle('system:askScreen', async () => {
+  try { await desktopCapturer.getSources({ types: ['screen'], thumbnailSize: { width: 1, height: 1 } }) } catch {}
+  let granted = false
+  try { granted = await capture.requestScreen() } catch {}
+  if (!granted) {
+    try { granted = systemPreferences.getMediaAccessStatus('screen') === 'granted' } catch {}
+  }
+  return { granted }
+})
+
 ipcMain.handle('system:askMedia', async (_e, kind) => {
   try { return await systemPreferences.askForMediaAccess(kind) } catch { return false }
 })
